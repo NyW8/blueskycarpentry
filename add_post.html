@@ -1,0 +1,125 @@
+<script>
+  // Copy images to asset folder, create template with given info & current date
+  const template = `---
+layout: post
+title: "<<title>>"
+date: 2017-10-19
+description: "<<description>>"
+images: <<images>>
+author: Blue Way
+materials: "<<materials>>"
+height: <<height>>
+width: <<width>>
+depth: <<depth>>
+tags: <<tags>>
+---
+`;
+window.onload = function (){
+    var form = document.getElementsByTagName("form")[0];
+    var title = document.getElementById("title");
+    var description = document.getElementById("description");
+    var materials = document.getElementById("materials");
+    var height = document.getElementById("height");
+    var width = document.getElementById("width");
+    var depth = document.getElementById("depth");
+    var height_type = document.getElementById("height_type");
+    var width_type = document.getElementById("width_type");
+    var depth_type = document.getElementById("depth_type");
+    var furniture = document.getElementById("furniture");
+    var outdoor = document.getElementById("outdoor");
+    var addition_rennovation = document.getElementById("addition_rennovation");
+    var design = document.getElementById("design");
+    var images = document.getElementById("images");
+    form.onsubmit = function (event) {
+        var size = [height.value + " " + height_type.value, width.value + " " + width_type.value, depth.value + " " + depth_type.value];
+        var tags = [];
+        if (furniture.checked) tags.push("Fine furniture");
+        if (outdoor.checked) tags.push("Outdoor");
+        if (addition_rennovation.checked) tags.push("Addition/Renovation");
+        if (design.checked) tags.push("Design");
+        var images2 = ["image1", "image2"]; // TODO
+        console.log(images.files);
+        for (var i in images.files) {
+            var file = images.files[i];
+            //copy file to assets/img folder
+        }
+        createPost(title.value, description.value, materials.value, size, tags, images2);
+    }
+}
+
+var createPost = function (title, description, materials, size, tags, images) {
+    console.log('creating post');
+    var postText = template;
+    var tagText = ""
+    for (var tag in tags) {
+        tagText += `
+  - ` + tags[tag]
+    }
+    var imgText = ""
+    for (var img in images) {
+        imgText += `
+  - ` + images[img]
+    }
+    postText = postText.replace("<<title>>", title);
+    postText = postText.replace("<<description>>", description);
+    postText = postText.replace("<<materials>>", materials);
+    postText = postText.replace("<<height>>", size[0]);
+    postText = postText.replace("<<width>>", size[1]);
+    postText = postText.replace("<<depth>>", size[2]);
+    postText = postText.replace("<<tags>>", tagText);
+    postText = postText.replace("<<images>>", imgText);
+    console.log("finished creating post:")
+    console.log(postText);
+}
+
+</script>
+<body>
+    <h2>Add a Piece</h2>
+        Piece name: <input id="title" type="text" placeholder="Enter a title for the piece" required>
+        <br>
+        Description: <input id="description" type="text" placeholder="Optional">
+        <br>
+        Materials: <input id="materials" type="text" placeholder="E.g. cherry and mahogany" required>
+        <br>
+
+        <h3>Size</h3>
+        Height: <input id="height" type="number" min="0" placeholder="Enter a number" required>
+        <select id="height_type">
+            <option value="in" selected="selected">in</option>
+            <option value="cm">cm</option>
+            <option value="ft">ft</option>
+        </select>
+        <br>
+        Width: <input id="width" type="number" min="0" placeholder="Enter a number" required>
+        <select id="width_type">
+            <option value="in" selected="selected">in</option>
+            <option value="cm">cm</option>
+            <option value="ft">ft</option>
+        </select>
+        <br>
+        Depth: <input id="depth" type="number" min="0" placeholder="Enter a number" required>
+        <select id="depth_type">
+            <option value="in" selected="selected">in</option>
+            <option value="cm">cm</option>
+            <option value="ft">ft</option>
+        </select>
+        <br>
+
+        <h3>Tags (Optional)</h3>
+        <input id="furniture" type="checkbox"> Furniture
+        <br>
+        <input id="outdoor" type="checkbox"> Outdoor
+        <br>
+        <input id="addition_rennovation" type="checkbox"> Addition/Rennovation
+        <br>
+        <input id="design" type="checkbox"> Design
+        <br><br>
+
+        <h3>Images</h3>
+        <input id="images" type="file" accept="image/*" multiple="multiple" required> 
+        
+        <br><br>
+        <form id="add_piece">
+        <input type="submit">
+    </form>
+</body>

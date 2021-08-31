@@ -72,15 +72,18 @@
     &:hover {
       .posts__img {
         transform: translate3d(0, -10px, 0);
+        text-align: -webkit-center;
+      }
+      .posts__text {
+        max-height: 80pt;
       }
     }
   }
 
   &__img {
-    margin-bottom: 1em;
-
     background-color: $color-lightgrey;
     transition: transform 400ms ease-in-out;
+    text-align: -webkit-center; 
 
     img {
       display: block;
@@ -91,6 +94,13 @@
     @extend %font-size;
 
     font-weight: 400;
+
+    max-height: 0;
+    overflow: hidden;
+    -webkit-transition: max-height 0.8s;
+	  -moz-transition: max-height 0.8s;
+	  transition: max-height 0.8s;
+    text-align: -webkit-center;
   }
 
   &__pagination {
