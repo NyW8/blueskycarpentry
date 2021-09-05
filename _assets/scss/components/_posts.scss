@@ -70,12 +70,12 @@
     color: $color-black;
 
     &:hover {
-      .posts__img {
+      .posts__img:not(.slideshow_full) {
         transform: translate3d(0, -10px, 0);
         text-align: -webkit-center;
       }
       .posts__text {
-        max-height: 80pt;
+        max-height: 200pt;
       }
     }
   }
@@ -84,9 +84,56 @@
     background-color: $color-lightgrey;
     transition: transform 400ms ease-in-out;
     text-align: -webkit-center; 
+    position:relative;
 
     img {
       display: block;
+    }
+
+    & .posts__slideshow {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+    }
+
+    &.slideshow_full {
+      position:absolute;
+      width: 80vw;
+      height: 80vh;
+      left: 10vw;
+      right: 10vw;
+      z-index: 1;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: ease-in-out;
+      box-shadow:0 0 0 1600px rgba(0,0,0,0.65);
+
+      & .exit, & .slideshow__details {
+        display: block;
+      }
+    }
+
+    & .slideshow__details {
+      display: none;
+      padding: 15px;
+      position: relative;
+      & .title {
+        font-size: larger;
+        font-weight: bold;
+      }
+    }
+
+    & .exit {
+      position: absolute;
+      right: 20px;
+      top: 0px;
+      font-size: xx-large;
+      cursor: pointer;
+      display: none;
     }
   }
 
@@ -101,6 +148,35 @@
 	  -moz-transition: max-height 0.8s;
 	  transition: max-height 0.8s;
     text-align: -webkit-center;
+  }
+
+
+  &__arrows {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    .slideshow-left, .slideshow-right {
+      height:70px;
+      width: 70px;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      border-radius: 10px;
+      background: #cccccc47;
+    }
+
+    .slideshow-left {
+      left: 10px;
+    }
+
+    .slideshow-right {
+      right: 10px;
+    }
   }
 
   &__pagination {

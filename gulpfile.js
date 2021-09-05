@@ -41,6 +41,7 @@ function lint() {
     './_assets/js/components/_miscellaneous.js',
     './_assets/js/components/_pageTransition.js',
     './_assets/js/components/_popup.js',
+    './_assets/js/components/_slideshow.js',
     './_assets/js/_inits.js'
   ])
     .pipe(eslint())

@@ -1,0 +1,24 @@
+<section class="slideshow popup2">
+  <div class="popup__close">
+    <div class="popup__exit"></div>
+  </div>
+  <div class="slideshow__container popup__container" style="height:80%">
+
+    <figure class="slideshow__figure">
+
+      <div class="slideshow__arrows">
+        <div class="slideshow-left">&#10094;</div>
+        <div class="slideshow-right">&#10095;</div>
+      </div>
+
+      {% for image in post.images %}
+        {% if image == post.images[0] %}
+          <img class="slideshow__img" src="{{ image }}" alt="{{ post.title }}" data-aos="fade-in" itemprop="image" style="display:block"/>
+        {% else %}
+          <img class="slideshow__img" src="{{ image }}" alt="{{ post.title }}" data-aos="fade-in" itemprop="image" style="display:none"/>
+        {% endif %}
+      {% endfor %}
+    </figure>
+
+  </div>
+</section>
